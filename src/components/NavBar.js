@@ -1,43 +1,20 @@
-import React from 'react';
+import React from "react";
 
 export default function NavBar({ currentPage, setCurrentPage }) {
   return (
-    <nav style={{
-      background: '#0077cc',
-      padding: '12px 20px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      color: 'white'
-    }}>
-      <h2>🎓 Dream Tuition Center</h2>
-      <div>
+    <nav className="navbar">
+      <h2 className="navbar-title">🎓 Dream Tuition Center</h2>
+
+      <div className="navbar-buttons">
         <button
-          onClick={() => setCurrentPage('list')}
-          className="nav-btn"
-          style={{
-            marginRight: 10,
-            background: currentPage === 'list' ? '#005fa3' : '#0094ff',
-            border: 'none',
-            color: 'white',
-            padding: '8px 14px',
-            borderRadius: 5,
-            cursor: 'pointer'
-          }}
+          onClick={() => setCurrentPage("list")}
+          className={`nav-btn ${currentPage === "list" ? "active" : ""}`}
         >
           Students List
         </button>
         <button
-          onClick={() => setCurrentPage('add')}
-          className="nav-btn"
-          style={{
-            background: currentPage === 'add' ? '#005fa3' : '#0094ff',
-            border: 'none',
-            color: 'white',
-            padding: '8px 14px',
-            borderRadius: 5,
-            cursor: 'pointer'
-          }}
+          onClick={() => setCurrentPage("add")}
+          className={`nav-btn ${currentPage === "add" ? "active" : ""}`}
         >
           Add Student
         </button>

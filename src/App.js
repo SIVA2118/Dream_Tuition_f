@@ -1,10 +1,19 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import AddStudent from './components/AddStudent';
-import StudentList from './components/StudentList';
-import ReceiptForm from './components/ReceiptForm';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
+import AddStudent from "./components/AddStudent";
+import StudentList from "./components/StudentList";
+import ReceiptForm from "./components/ReceiptForm";
+import FeesPage from "./components/FeesPage";
+
+import "./App.css";
 
 export default function App() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => setDrawerOpen(!drawerOpen);
+  const closeDrawer = () => setDrawerOpen(false);
+
   return (
     <Router>
       <div className="app">
@@ -14,32 +23,68 @@ export default function App() {
             <p className="subtitle">Create receipts & manage students easily</p>
           </div>
 
-          {/* ✅ Navigation Bar */}
-          <nav className="navbar" style={{
-            background: '#333', padding: '10px', display: 'flex',
-            justifyContent: 'center', gap: '20px'
-          }}>
-            <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>Home</Link>
-            <Link to="/add-student" style={{ color: '#fff', textDecoration: 'none' }}>Add Student</Link>
-            <Link to="/students" style={{ color: '#fff', textDecoration: 'none' }}>Student List</Link>
-            <Link to="/receipt" style={{ color: '#fff', textDecoration: 'none' }}>Receipt</Link>
+          {/* 🌐 Navbar */}
+          <nav className="navbar">
+            <h2 className="navbar-title"></h2>
+
+            {/* Hamburger Icon for Mobile */}
+            <button className="menu-toggle" onClick={toggleDrawer}>
+              {drawerOpen ? <FaTimes /> : <FaBars />}
+            </button>
+
+            {/* Desktop Links */}
+            <div className="navbar-links">
+              <Link to="/" onClick={closeDrawer}>
+                Home
+              </Link>
+              <Link to="/add-student" onClick={closeDrawer}>
+                Add Student
+              </Link>
+              <Link to="/students" onClick={closeDrawer}>
+                Student List
+              </Link>
+              <Link to="/receipt" onClick={closeDrawer}>
+                Receipt
+              </Link>
+              <Link to="/fees" onClick={closeDrawer}>
+              Fees
+              </Link>
+
+            </div>
           </nav>
         </header>
 
-        <main className="container" style={{ padding: '20px' }}>
+        {/* 🧭 Drawer (for Mobile) */}
+        <div className={`drawer ${drawerOpen ? "open" : ""}`}>
+          <Link to="/" onClick={closeDrawer}>🏠 Home</Link>
+          <Link to="/add-student" onClick={closeDrawer}>➕ Add Student</Link>
+          <Link to="/students" onClick={closeDrawer}>📋 Student List</Link>
+          <Link to="/receipt" onClick={closeDrawer}>🧾 Receipt</Link>
+          <Link to="/fees" onClick={closeDrawer}>Fees</Link>
+
+        </div>
+
+        {/* Overlay for mobile when drawer is open */}
+        {drawerOpen && <div className="overlay" onClick={closeDrawer}></div>}
+
+        {/* 🌈 Page Content */}
+        <main className="container">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/add-student" element={<AddStudent />} />
             <Route path="/students" element={<StudentList />} />
             <Route path="/receipt" element={<ReceiptForm />} />
+            <Route path="/fees" element={<FeesPage />} />
+
           </Routes>
         </main>
 
-        <footer className="footer" style={{
-          background: '#222', color: '#fff',
-          textAlign: 'center', padding: '15px', marginTop: '20px'
-        }}>
-          <small>📍 Address: Door No 50, 1st floor, Pachaiyapan Nagar, 1st street, Rakkiyapalayam pirvu, Tiruppur - 641606</small><br />
+        <footer className="footer">
+          <small>
+            📍 Address: Door No 50, 1st floor, Pachaiyapan Nagar, 1st street,
+            Rakkiyapalayam pirvu, Tiruppur - 641606
+          </small>
+          <br />
           <small>📞 Mobile: 8110054961</small>
         </footer>
       </div>
@@ -47,12 +92,29 @@ export default function App() {
   );
 }
 
-// 🏠 Home Page Component
 function HomePage() {
   return (
-    <div style={{ textAlign: 'center', marginTop: '40px' }}>
-      <h2>Welcome to Dream Tuition Center</h2>
-      <p>Select a page from the navigation bar to continue.</p>
+    <div style={{ textAlign: "center", marginTop: "40px" }}>
+      <h2 style={{ color: "#1e293b", fontSize: "1.8rem", marginBottom: "10px" }}>
+        Welcome to Dream Tuition Center
+      </h2>
+      <p style={{ color: "#475569", marginBottom: "30px" }}>
+        Select a page from the navigation bar to continue.
+      </p>
+
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <img
+          src="https://t3.ftcdn.net/jpg/12/94/01/34/240_F_1294013479_9TS0PUzsTSRBGofEYeHkDpEShO7gJccC.jpg"
+          alt="Dream Tuition Center"
+          style={{
+            width: "80%",
+            maxWidth: "700px",
+            borderRadius: "16px",
+            boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
+            objectFit: "cover",
+          }}
+        />
+      </div>
     </div>
   );
 }

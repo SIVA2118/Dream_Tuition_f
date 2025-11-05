@@ -5,6 +5,7 @@ export default function StudentList() {
   const [loading, setLoading] = useState(true);
   const [editingStudent, setEditingStudent] = useState(null);
   const [editData, setEditData] = useState({ name: "", email: "", mobile: "" });
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchStudents = async () => {
     try {
@@ -15,7 +16,7 @@ export default function StudentList() {
       // Add formatted Student IDs (DT001, DT002, etc.)
       const formatted = (data || []).map((s, i) => ({
         ...s,
-        studentId: `DT${String(i + 1).padStart(3, "0")}`, // DT001, DT002...
+        studentId: `DT${String(i + 1).padStart(3, "0")}`,
       }));
 
       setStudents(formatted);
@@ -81,9 +82,16 @@ export default function StudentList() {
     }
   };
 
-  const cancelEdit = () => {
-    setEditingStudent(null);
-  };
+  const cancelEdit = () => setEditingStudent(null);
+
+  // 🔍 Filtered students list based on search input (now includes ID)
+  const filteredStudents = students.filter(
+    (s) =>
+      s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      s.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      s.mobile.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      s.studentId.toLowerCase().includes(searchTerm.toLowerCase()) // ✅ Added ID search
+  );
 
   return (
     <div
@@ -108,15 +116,32 @@ export default function StudentList() {
         🎓 Student List
       </h2>
 
+      {/* 🔎 Search Bar */}
+      <input
+        type="text"
+        placeholder="Search by name, email, mobile, or ID (DT001)..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "8px 10px",
+          borderRadius: 8,
+          border: "1px solid #cbd5e1",
+          marginBottom: 16,
+          fontSize: 14,
+          outlineColor: "#3b82f6",
+        }}
+      />
+
       {loading ? (
         <div style={{ textAlign: "center", color: "#94a3b8" }}>Loading…</div>
-      ) : students.length === 0 ? (
+      ) : filteredStudents.length === 0 ? (
         <div style={{ textAlign: "center", color: "#94a3b8" }}>
           No students found
         </div>
       ) : (
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-          {students.map((s) => (
+          {filteredStudents.map((s) => (
             <li
               key={s._id}
               style={{
