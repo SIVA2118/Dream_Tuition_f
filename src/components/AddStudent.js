@@ -12,7 +12,7 @@ export default function AddStudent() {
 
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:5000/api/students', {
+      const res = await fetch('https://dream-tuition-b-jdm8.vercel.app/api/students', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, mobile }),

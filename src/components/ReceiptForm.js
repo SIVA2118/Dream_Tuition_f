@@ -16,7 +16,7 @@ export default function ReceiptForm() {
 
   const fetchStudents = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/students");
+      const res = await fetch("https://dream-tuition-b-jdm8.vercel.app/api/students");
       const data = await res.json();
       setStudents(data || []);
     } catch (err) {
@@ -39,7 +39,7 @@ export default function ReceiptForm() {
 
     setSending(true);
     try {
-      const res = await fetch("http://localhost:5000/api/receipts", {
+      const res = await fetch("https://dream-tuition-b-jdm8.vercel.app/api/receipts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

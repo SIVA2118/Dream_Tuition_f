@@ -19,8 +19,8 @@ export default function App() {
       <div className="app">
         <header className="hero">
           <div className="hero-inner">
-            <h1>Dream Tuition Center</h1>
-            <p className="subtitle">Create receipts & manage students easily</p>
+            <h1>Dream Tuition</h1>
+            <p className="subtitle">manage students easily</p>
           </div>
 
           {/* 🌐 Navbar */}
@@ -94,27 +94,14 @@ export default function App() {
 
 function HomePage() {
   return (
-    <div style={{ textAlign: "center", marginTop: "40px" }}>
-      <h2 style={{ color: "#1e293b", fontSize: "1.8rem", marginBottom: "10px" }}>
-        Welcome to Dream Tuition Center
-      </h2>
-      <p style={{ color: "#475569", marginBottom: "30px" }}>
-        Select a page from the navigation bar to continue.
-      </p>
+    <div className="homepage">
+      <h2>Welcome to Dream Tuition Center</h2>
+      <p>Select a page from the navigation bar to continue.</p>
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <img
-          src="https://t3.ftcdn.net/jpg/12/94/01/34/240_F_1294013479_9TS0PUzsTSRBGofEYeHkDpEShO7gJccC.jpg"
-          alt="Dream Tuition Center"
-          style={{
-            width: "80%",
-            maxWidth: "700px",
-            borderRadius: "16px",
-            boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
-            objectFit: "cover",
-          }}
-        />
-      </div>
+      <img
+        src="https://t3.ftcdn.net/jpg/12/94/01/34/240_F_1294013479_9TS0PUzsTSRBGofEYeHkDpEShO7gJccC.jpg"
+        alt="Dream Tuition Center"
+      />
     </div>
   );
 }

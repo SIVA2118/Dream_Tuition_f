@@ -10,7 +10,7 @@ export default function StudentList() {
   const fetchStudents = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/students");
+      const res = await fetch("https://dream-tuition-b-jdm8.vercel.app/api/students");
       const data = await res.json();
 
       // Add formatted Student IDs (DT001, DT002, etc.)
@@ -38,7 +38,7 @@ export default function StudentList() {
   const deleteStudent = async (id) => {
     if (!window.confirm("Are you sure you want to delete this student?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/students/${id}`, {
+      const res = await fetch(`https://dream-tuition-b-jdm8.vercel.app/api/students/${id}`, {
         method: "DELETE",
       });
       const data = await res.json();
@@ -64,7 +64,7 @@ export default function StudentList() {
 
   const saveUpdate = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/students/${id}`, {
+      const res = await fetch(`https://dream-tuition-b-jdm8.vercel.app/api/students/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editData),

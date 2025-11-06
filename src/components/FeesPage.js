@@ -14,7 +14,7 @@ export default function PaidPage() {
     setSelectedMonth(month);
 
     try {
-      const res = await fetch(`http://localhost:5000/api/students-payment?month=${month}`);
+      const res = await fetch(`https://dream-tuition-b-jdm8.vercel.app/api/students-payment?month=${month}`);
       const data = await res.json();
 
       if (res.ok) {
